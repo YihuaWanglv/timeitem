@@ -1,11 +1,8 @@
 package com.iyihua.itimes.config.cache;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -13,21 +10,25 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
-
 @Configuration
 //@EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
+	@Value("${redis.host}")
+	private String redisHost;
+	@Value("${redis.port}")
+	private Integer redisPort;
+	
 	@Bean
 	public JedisConnectionFactory redisConnectionFactory() {
 		JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
 		// Defaults
 //		redisConnectionFactory.setHostName("127.0.0.1");
-		redisConnectionFactory.setHostName("192.168.1.134");
-		redisConnectionFactory.setPort(6379);
+		redisConnectionFactory.setHostName(redisHost);
+//		redisConnectionFactory.setHostName("192.168.1.134");
+//		redisConnectionFactory.setPort(6379);
+		redisConnectionFactory.setPort(redisPort);
 //		redisConnectionFactory.setPort(7000);
 		return redisConnectionFactory;
 	}

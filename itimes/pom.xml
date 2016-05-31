@@ -12,6 +12,7 @@
 		<groupId>com.iyihua</groupId>
 		<artifactId>module_base</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../module_base</relativePath>
 	</parent>
 
 	<properties>

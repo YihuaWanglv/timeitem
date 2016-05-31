@@ -2,6 +2,7 @@ package com.iyihua.itimes.config.redis;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import redis.clients.jedis.Jedis;
@@ -10,14 +11,11 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Component
 public class RedisManager {
-	
-	private String host = "192.168.1.134";
-	
+//	private String host = "192.168.1.134";
+	@Value("${redis.host}")
+	private String host = "127.0.0.1";
+	@Value("${redis.port}")
 	private int port = 6379;
-	
-//	private String host = "192.168.1.128";
-//	
-//	private int port = 7000;
 	
 	// 0 - never expire
 	private int expire = 0;
